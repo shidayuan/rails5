@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @posts = @group.posts
   end
 
   def edit
@@ -34,7 +35,7 @@ class GroupsController < ApplicationController
     redirect_to groups_path,notice: "编辑成功"
   else
     render :edit
-   end 
+   end
   end
 
   def destroy
