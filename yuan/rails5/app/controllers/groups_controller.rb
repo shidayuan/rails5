@@ -4,12 +4,9 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end
 
-  def edit
-    @group = Group.find(params[:id])
+  def new
+    @group = Group.new
 
-    if current_user != @group.user
-      redirect_to root_path, alert: "You have no permission."
-    end
   end
 
   def create
@@ -21,5 +18,37 @@ class GroupsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @group = Group.find(params[:id])
+  end
+
+  def edit
+    @group = Group.find(params[:id])
+  end
+
+  def update
+    @group = Group.find(params[:id])
+    if @group.update(group_params)
+    redirect_to groups_path,notice: "编辑成功"
+  else
+    render :edit
+   end 
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to groups_path,alert: "删除成功"
+  end
+
+
+
+  private
+
+  def group_params
+    params.require(:group).permit(:title, :description)
+
   end
 end
