@@ -2,7 +2,7 @@
   <div class="group">
 
     <span class="pull-right">
-      <% if current_user && current_user.is_member_of?(@group) %>
+       <% if current_user && current_user.is_member_of?(@group) %>
        <label class="label label-success"> 群组成员 </label>
       <%= link_to("Quit Group", quit_group_path(@group), method: :post, class: "btn btn-default") %>
       <% else %>
@@ -10,10 +10,6 @@
       <%= link_to("Join Group", join_group_path(@group), method: :post, class: "btn btn-default") %>
       <% end %>
     </span>
-
-
-    <%= link_to("write a Post", new_group_post_path(@group), class: "btn btn-default pull-right") %>
-    <%= link_to("Edit", edit_group_path(@group), class: "ctn ctn-primary pull-right") %>
 
     <% if current_user && current_user == @group.user %>
   <%= link_to("write a Post", new_group_post_path(@group), class: "btn btn-default pull-right") %>
@@ -47,4 +43,3 @@
    <div class="text-center">
      <%= will_paginate @posts %>
    </div>
-
