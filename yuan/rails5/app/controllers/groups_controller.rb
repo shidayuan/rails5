@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.save
-    redirect_to groups_path
+    redirect_to groups_path,notice: "新增成功"
   end
 
   def show
@@ -19,13 +19,20 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
-  end 
+  end
 
   def update
     @group = Group.find(params[:id])
     @group.update(group_params)
-    redirect_to groups_path
+    redirect_to groups_path,notice: "编辑成功"
   end
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to groups_path,alert: "删除成功"
+  end
+
 
 
   private
