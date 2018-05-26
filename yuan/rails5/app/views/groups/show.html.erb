@@ -1,5 +1,8 @@
 <div class="col-md-12">
   <div class="group">
+
+    <%= link_to("write a Post", new_group_post_path(@group), class: "btn btn-default pull-right") %>
+    <%= link_to("Edit", edit_group_path(@group), class: "ctn ctn-primary pull-right") %>
     <% if current_user && current_user == @group.user %>
     <%= link_to("Edit", edit_group_path(@group), class: "btn btn-primary pull-right") %>
     <% end %>
@@ -7,3 +10,25 @@
   <h2><%= @group.title %></h2>
   <p><%= @group.description %></p>
 </div>
+<table class="table">
+     <thead>
+      <tr>
+         <th>文章内容</th>
+         <th>发表者</th>
+         <th>发表时间</th>
+       </tr>
+     </thead>
+     <tbody>
+       <% @posts.each do |post| %>
+         <tr>
+           <td><%= post.content %></td>
+           <td><%= post.user.email %></td>
+           <td><%= post.created_at %></td>
+         </tr>
+       <% end %>
+     </tbody>
+   </table>
+
+   <div class="text-center">
+     <%= will_paginate @posts %>
+   </div>
